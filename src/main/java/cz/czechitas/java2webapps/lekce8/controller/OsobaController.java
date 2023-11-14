@@ -66,11 +66,10 @@ public class OsobaController {
   }
 
   @PostMapping("/{id:[0-9]+}")
-  public String ulozit(@PathVariable long id, @ModelAttribute("osoba") @Valid Osoba osoba, BindingResult bindingResult) {
+  public String ulozit(@ModelAttribute("osoba") @Valid Osoba osoba, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return "detail";
     }
-    osoba.setId(id);
     osobaRepository.save(osoba);
     return "redirect:/";
   }
