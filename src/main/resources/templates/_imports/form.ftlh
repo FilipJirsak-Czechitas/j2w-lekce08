@@ -10,22 +10,24 @@
 
 [#macro input name label type="text" attributes...]
     <label for="${name}" class="form-label">${label}</label>
-    <input type="${type}" class="form-control ${bindStatus.hasFieldErrors(name)?string('is-invalid', 'is-valid')}" id="${name}" name="${name}" value="${bind[name]!}" [@attrs attributes /]>
+    <input type="${type}" class="form-control ${bindStatus.hasFieldErrors(name)?string('is-invalid', 'is-valid')}" id="${name}" name="${name}"
+           value="${bind[name]!}" [@attrs attributes /]>
     [@errors name=name /]
 [/#macro]
 
 [#macro inputDate name label attributes...]
     <label for="${name}" class="form-label">${label}</label>
-    <input type="date" class="form-control ${bindStatus.hasFieldErrors(name)?string('is-invalid', 'is-valid')}" id="${name}" name="${name}" value="${(bind[name]?date?iso_local)!}" [@attrs attributes /]>
+    <input type="date" class="form-control ${bindStatus.hasFieldErrors(name)?string('is-invalid', 'is-valid')}" id="${name}" name="${name}"
+           value="${(bind[name]?date?iso_local)!}" [@attrs attributes /]>
     [@errors name=name /]
 [/#macro]
 
 [#macro errors name]
     [#if bindStatus.hasFieldErrors(name)]
-        <ul  class="invalid-feedback">
-        [#list bindStatus.getFieldErrors(name) as error]
-            <li>${error.defaultMessage}</li>
-        [/#list]
+        <ul class="invalid-feedback">
+            [#list bindStatus.getFieldErrors(name) as error]
+                <li>${error.defaultMessage}</li>
+            [/#list]
         </ul>
     [/#if]
 [/#macro]
